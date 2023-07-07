@@ -27,8 +27,17 @@
                     @if(! $posts->isEmpty())
                         @foreach($posts as $item)
                             <div class="m-4 border-l dark:border-gray-600 pl-4">
-                                <div class="dark:text-gray-400 text-sm">{{ $item->createdBy->name }}</div>
+                                <div class="dark:text-gray-400 text-sm
+                                    {{ $item->createdBy->title == 'Mr.'
+                                        ? 'dark:text-blue-700' : 'dark:text-pink-700'
+                                    }}
+                                ">
+                                    {{ $item->createdBy->name }}
+                                </div>
                                 <div>{{ $item->body }}</div>
+                                <div class="text-sm underline dark:text-gray-600"><a href="{{ route('posts.edit',
+                                $item)
+                                }}">Edit</a></div>
                             </div>
                         @endforeach
                     @endif
