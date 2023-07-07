@@ -21,11 +21,15 @@ class PostController extends Controller
 
     public function edit(Post $post): View
     {
+        $this->authorize('edit-post', $post);
+
         return view('posts.edit', compact('post'));
     }
 
     public function update(Post $post): RedirectResponse
     {
+        $this->authorize('edit-post', $post);
+        
         $attributes = request()->validate([
             'body' => ['required', 'max:255'],
         ]);

@@ -35,9 +35,11 @@
                                     {{ $item->createdBy->name }}
                                 </div>
                                 <div>{{ $item->body }}</div>
-                                <div class="text-sm underline dark:text-gray-600"><a href="{{ route('posts.edit',
-                                $item)
-                                }}">Edit</a></div>
+                                @can('edit-post', $item)
+                                    <div class="text-sm underline dark:text-gray-600"><a href="{{ route('posts.edit',
+                                    $item)
+                                    }}">Edit</a></div>
+                                @endcan
                             </div>
                         @endforeach
                     @endif

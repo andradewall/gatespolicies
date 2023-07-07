@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\Post;
 use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -23,8 +22,9 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('edit-post', function (User $user, Post $post) {
-            return $post->createdBy->is($user);
+        Gate::before(function (User $user, $ability, $arguments) {
+            return $user->permissions()->where('permissions.name', $ability)->exists()
+                && $arguments[0]->createdBy->is($user);
         });
     }
 }

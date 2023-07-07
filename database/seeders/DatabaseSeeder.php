@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Permission;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -44,5 +45,13 @@ class DatabaseSeeder extends Seeder
             'body' => 'I wanna drink some beer today!',
             'user_id' => 4,
         ]);
+
+        $editPostPermission = Permission::query()->create([
+            'name' => 'edit-post',
+        ]);
+
+        foreach (User::all() as $user) {
+            $user->permissions()->attach($editPostPermission);
+        }
     }
 }
