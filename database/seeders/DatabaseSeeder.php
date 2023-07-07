@@ -17,14 +17,16 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'John Doe',
             'email' => 'johndoe@example.com',
-            'title' => 'Mr.',
+            'gender' => 'M',
         ]);
 
         User::factory()->create([
             'name' => 'Jane Doe',
             'email' => 'janedoe@example.com',
-            'title' => 'Ms.'
+            'gender' => 'F'
         ]);
+
+        User::factory(2)->create();
 
         Post::query()->create([
             'body' => 'I wanna go to the beach today!',
@@ -32,11 +34,15 @@ class DatabaseSeeder extends Seeder
         ]);
         Post::query()->create([
             'body' => 'Im feeling good today!',
-            'user_id' => 1,
+            'user_id' => 2,
         ]);
         Post::query()->create([
             'body' => 'I have to go to the gym today!',
-            'user_id' => 2,
+            'user_id' => 3,
+        ]);
+        Post::query()->create([
+            'body' => 'I wanna drink some beer today!',
+            'user_id' => 4,
         ]);
     }
 }

@@ -25,8 +25,10 @@ Route::middleware('auth')->group(function () {
 
     #region Post
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
-    Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
-    Route::patch('/posts/{post}/update', [PostController::class, 'update'])->name('posts.update');
+    Route::middleware('can:edit-post,post')->group(function () {
+        Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
+        Route::patch('/posts/{post}/update', [PostController::class, 'update'])->name('posts.update');
+    });
     #endregion
 });
 

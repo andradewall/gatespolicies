@@ -28,7 +28,7 @@
                         @foreach($posts as $item)
                             <div class="m-4 border-l dark:border-gray-600 pl-4">
                                 <div class="dark:text-gray-400 text-sm
-                                    {{ $item->createdBy->title == 'Mr.'
+                                    {{ $item->createdBy->gender == 'M'
                                         ? 'dark:text-blue-700' : 'dark:text-pink-700'
                                     }}
                                 ">
